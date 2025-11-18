@@ -12,30 +12,27 @@ import TitleBar from './components/TitleBar/TitleBar'
 
 function App() {
   return (
-    <div>
+    <Router>
+      {/* 自定义标题栏组件 */}
       <TitleBar />
 
-      <Router>
-        {/* 自定义标题栏组件 */}
+      {/* <nav>
+        <ul>
+          <li>
+            <Link to="/">首页</Link>
+          </li>
+          <li>
+            <Link to="/about">关于我们</Link>
+          </li>
+        </ul>
+      </nav> */}
 
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">首页</Link>
-            </li>
-            <li>
-              <Link to="/about">关于我们</Link>
-            </li>
-          </ul>
-        </nav>
-
-        {/* 路由部分 */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </Router>
-    </div>
+      {/* 路由部分 */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
   )
 }
 
