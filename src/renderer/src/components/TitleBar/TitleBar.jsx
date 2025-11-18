@@ -29,6 +29,7 @@ const TitleBar = () => {
 
   // 关闭窗口
   const closeWindow = () => {
+    alert('click close')
     window.windowControl.close()
   }
 
@@ -38,21 +39,20 @@ const TitleBar = () => {
     const drag = () => {
       window.startDrag() // 启动拖拽
     }
-
     titlebar.addEventListener('mousedown', drag)
-
     return () => {
       titlebar.removeEventListener('mousedown', drag)
     }
   }, [])
 
   return (
+    // 不能用title-bar 做id 会点不动
     <div id="titlebar">
       <div id="title">My Custom Title</div>
       <div id="window-controls">
         <button onClick={minimizeWindow}>_</button>
         <button onClick={toggleMaximizeWindow}>{isMaximized ? '□' : '⬛'}</button>
-        <button onClick={closeWindow}>X</button>
+        <button onClick={closeWindow}>关闭</button>
       </div>
     </div>
   )

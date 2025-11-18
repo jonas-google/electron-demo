@@ -8,6 +8,7 @@
   color: white;
   padding: 10px;
   user-select: none;
+  /* 这个破东西，让组件没法点击 */
   -webkit-app-region: drag;
   /* 使标题栏可以拖动窗口 */
 }
@@ -28,6 +29,8 @@
   margin-left: 10px;
   cursor: pointer;
   border:1px solid red;
+    /* 这个破东西，让组件没法点击 必须得这样设置一下*/
+  -webkit-app-region: no-drag;
 }
 
 #window-controls button:hover {

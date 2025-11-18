@@ -25,28 +25,6 @@ function createWindow() {
     mainWindow.show() // 当内容准备好后显示窗口
   })
 
-  // 跟窗口设置有关 start 1
-  // 最大化窗口
-  ipcMain.on('maximize-window', () => {
-    mainWindow.maximize()
-  })
-
-  // 恢复窗口
-  ipcMain.on('restore-window', () => {
-    mainWindow.restore()
-  })
-
-  // 关闭窗口
-  ipcMain.on('close-window', () => {
-    mainWindow.close()
-  })
-
-  // 判断窗口是否最大化
-  ipcMain.handle('is-window-maximized', () => {
-    return mainWindow.isMaximized()
-  })
-  // end 1
-
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url) // 拦截并通过外部浏览器打开链接
     return { action: 'deny' }
@@ -103,6 +81,34 @@ app.whenReady().then(() => {
 
   // IPC测试，主进程与渲染进程的通信
   ipcMain.on('ping', () => console.log('pong'))
+
+  // 跟窗口设置有关 start 1
+  // 最小化窗口
+  ipcMain.on('minimize-window', () => {
+    mainWindow.minimize()
+  })
+
+  // 最大化窗口
+  ipcMain.on('maximize-window', () => {
+    mainWindow.maximize()
+  })
+
+  // 恢复窗口
+  ipcMain.on('restore-window', () => {
+    mainWindow.restore()
+  })
+
+  // 关闭窗口
+  ipcMain.on('close-window', () => {
+    // window.alert('close ipc main') 主线程里面没有window 这个会报错
+    mainWindow.close()
+  })
+
+  // 判断窗口是否最大化
+  ipcMain.handle('is-window-maximized', () => {
+    return mainWindow.isMaximized()
+  })
+  // end 1
 
   createWindow()
 
