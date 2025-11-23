@@ -11,6 +11,8 @@ An Electron application with React
 ### Install
 
 ```bash
+npm create @quick-start/electron@latest
+
 $ npm install
 ```
 
