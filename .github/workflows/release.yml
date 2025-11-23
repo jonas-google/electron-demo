@@ -3,41 +3,33 @@ name: Build/release Electron app
 on:
   push:
     tags:
-      - v*.*.* # 只在标签推送时触发
+      - v*.*.*
 
 jobs:
   release:
-    runs-on: ubuntu-latest # 只在 ubuntu-latest 上运行
+    runs-on: macos-latest
 
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
 
-      # 使用最新版本的 Node.js
-      - name: Setup Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'node' # 自动安装最新的稳定版 Node.js
+          node-version: 'node'
 
-      # 安装项目依赖
       - name: Install Dependencies
         run: npm install
 
-      # 执行 Linux 构建
-      - name: Build Linux
-        run: npm run build:linux
+      - name: build-mac
+        run: npm run build:mac
 
-      # 发布构建文件
-      - name: Release
+      - name: release
         uses: softprops/action-gh-release@v1
         with:
           draft: true
           files: |
-            dist/*.AppImage
-            dist/*.deb
-            dist/*.rpm
-            dist/*.tar.gz
-            dist/*.yml
-            dist/*.blockmap
+            dist/*.dmg
+            dist/*.zip
         env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }} # 使用 GitHub Token
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
